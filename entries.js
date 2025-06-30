@@ -24,7 +24,9 @@ function getMonthName(dateStr) {
 
 function formatDay(dateStr) {
   const d = new Date(dateStr);
-  const weekday = d.toLocaleDateString("de-DE", { weekday: "short" }).toUpperCase();
+  const weekday = d
+    .toLocaleDateString("de-DE", { weekday: "short" })
+    .toUpperCase();
   const day = String(d.getDate()).padStart(2, "0");
   return { weekday, day };
 }
@@ -33,60 +35,76 @@ function formatDay(dateStr) {
 // 📦 EINTRAG RENDERN
 // ===============================
 
-function renderDayBlock(dayEntry) {
-  const wrapper = document.createElement("article");
-  wrapper.classList.add("entry");
+function renderEntry(entry) {
+  const container = document.createElement("div");
+  container.classList.add("entryGroup");
 
-  // Linke Seite (Datum)
-  const left = document.createElement("div");
-  left.classList.add("left");
+  entry.entries.forEach((singleEntry) => {
+    const entryDiv = document.createElement("div");
+    entryDiv.classList.add("entry");
 
-  const dateElement = document.createElement("time");
-  dateElement.classList.add("daydate");
-  dateElement.dateTime = dayEntry.date;
-  const { weekday, day } = formatDay(dayEntry.date);
-  dateElement.innerHTML = `<strong>${weekday}</strong><br>${day}`;
-  left.appendChild(dateElement);
+    // 🔹 LINKS
+    const left = document.createElement("div");
+    left.classList.add("left");
 
-  // Mitte (alle Einträge des Tages)
-  const middle = document.createElement("div");
-  middle.classList.add("middle");
+    const { weekday, day } = formatDay(entry.date);
 
-  dayEntry.entries.forEach((entry) => {
-    const note = document.createElement("p");
-    note.textContent = entry.note;
+    const daySpan = document.createElement("div");
+    daySpan.classList.add("day");
+    daySpan.textContent = weekday;
 
-    const info = document.createElement("div");
-    info.classList.add("middleBottom");
+    const dateSpan = document.createElement("div");
+    dateSpan.classList.add("date");
+    dateSpan.textContent = day;
 
-    const time = document.createElement("p");
-    time.classList.add("time");
-    time.textContent = entry.time;
+    left.appendChild(daySpan);
+    left.appendChild(dateSpan);
 
-    const mood = document.createElement("p");
-    mood.classList.add("whatsHappening");
-    mood.textContent = entry.mood;
+    // 🔹 MITTE
+    const middle = document.createElement("div");
+    middle.classList.add("middle");
 
-    info.appendChild(time);
-    info.appendChild(mood);
+    const mood = document.createElement("div");
+    mood.textContent = singleEntry.mood;
+
+    const note = document.createElement("div");
+    note.textContent = singleEntry.note;
+
+    const middleBottom = document.createElement("div");
+    middleBottom.classList.add("middleBottom");
+    middleBottom.textContent = singleEntry.time;
+
+    middle.appendChild(mood);
     middle.appendChild(note);
-    middle.appendChild(info);
+    middle.appendChild(middleBottom);
+
+    // 🔹 RECHTS
+    const right = document.createElement("div");
+    right.classList.add("right");
+
+    const img = document.createElement("img");
+    img.src = singleEntry.images[0];
+    img.alt = "Day Image";
+
+    right.appendChild(img);
+
+    // 🔹 Zusammensetzen
+    entryDiv.appendChild(left);
+    entryDiv.appendChild(middle);
+    entryDiv.appendChild(right);
+    container.appendChild(entryDiv);
   });
 
-  // Rechte Seite (letztes Bild des Tages)
-  const right = document.createElement("div");
-  right.classList.add("right");
-  const lastEntry = dayEntry.entries[dayEntry.entries.length - 1];
-  if (lastEntry.image) {
-    const img = document.createElement("img");
-    img.src = lastEntry.image;
-    right.appendChild(img);
-  }
+  return container;
+}
 
-  // Zusammensetzen
-  wrapper.appendChild(left);
-  wrapper.appendChild(middle);
-  wrapper.appendChild(right);
+function renderDayBlock(entry) {
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("dayBlock");
+
+  const content = renderEntry(entry);
+  wrapper.appendChild(content);
+
   return wrapper;
 }
 
@@ -106,19 +124,22 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Sortierte Monatsgruppen anzeigen
-  Object.keys(groupedByMonth).sort().forEach((monthKey) => {
-    const monthEntries = groupedByMonth[monthKey];
-    const monthName = getMonthName(monthEntries[0].date);
+  Object.keys(groupedByMonth)
+    .sort()
+    .forEach((monthKey) => {
+      const monthEntries = groupedByMonth[monthKey];
+      const monthName = getMonthName(monthEntries[0].date);
 
-    const heading = document.createElement("h2");
-    heading.textContent = monthName.charAt(0).toUpperCase() + monthName.slice(1);
-    getEntries.appendChild(heading);
+      const heading = document.createElement("h2");
+      heading.textContent =
+        monthName.charAt(0).toUpperCase() + monthName.slice(1);
+      getEntries.appendChild(heading);
 
-    // Innerhalb des Monats: nach Datum sortieren
-    monthEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
-    monthEntries.forEach((dayEntry) => {
-      const block = renderDayBlock(dayEntry);
-      getEntries.appendChild(block);
+      // Innerhalb des Monats: nach Datum sortieren
+      monthEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
+      monthEntries.forEach((dayEntry) => {
+        const block = renderDayBlock(dayEntry);
+        getEntries.appendChild(block);
+      });
     });
-  });
 });

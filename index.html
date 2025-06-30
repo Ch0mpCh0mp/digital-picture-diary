@@ -8,7 +8,6 @@
   </head>
 
   <body>
-
     <header>
       <h1>MY DAY</h1>
       <nav>
@@ -27,6 +26,10 @@
           multiple
         />
 
+        <!-- Datum aussuchen eingeben -->
+        <label for="entryDate">Choose Date</label>
+        <input type="date" id="entryDate" name="entryDate"/>
+
         <!-- Mood eingeben -->
         <label for="moodOfTheDay">My Mood</label>
         <input type="text" name="mood" id="moodOfTheDay" />
@@ -40,14 +43,12 @@
       </form>
 
       <section id="entries"></section>
-
     </main>
 
     <footer>
+       <button id="clearButton">Delete</button>
     </footer>
 
     <script src="index.js"></script>
-
   </body>
-
 </html>

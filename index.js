@@ -4,9 +4,11 @@
 
 const getForm = document.getElementById("dailyMood");
 const getImage = document.getElementById("imageUpload");
+const dateInput = document.getElementById("entryDate");
 const moodInput = document.querySelector("#moodOfTheDay");
 const noteInput = document.querySelector("#noteOfTheDay");
 const entriesContainer = document.getElementById("entries");
+const clearBtn = document.getElementById("clearButton");
 
 // ===============================
 // 🔧 HILFSFUNKTIONEN
@@ -23,12 +25,16 @@ function formatDate(dateString) {
 }
 
 function renderEntry(entry, isToday = false) {
-  console.log("🎯 renderEntry aufgerufen für", entry.date);
+  console.log("renderEntry aufgerufen für", entry.date);
 
   const entryDiv = document.createElement("div");
   entryDiv.classList.add("entry");
 
-  entry.entries.forEach((singleEntry, index) => {
+  const entriesToRender = isToday
+    ? [entry.entries[entry.entries.length - 1]]
+    : entry.entries;
+
+  entriesToRender.forEach((singleEntry, index) => {
     const container = document.createElement("div");
     container.classList.add("singleEntry");
 
@@ -83,51 +89,39 @@ getForm.addEventListener("submit", (event) => {
     return;
   }
 
-  const imageList = [];
-  let filesLoaded = 0;
+  // Nur Dateinamen, keine Base64
+  const imageList = allFiles.map((file) => "img/" + file.name);
 
-  allFiles.forEach((file) => {
-    const reader = new FileReader();
+  const chosenDate = dateInput.value || new Date().toISOString().split("T")[0];
+  console.log("chosenDate", chosenDate);
+  const now = new Date();
 
-    reader.onload = function (event) {
-      imageList.push(event.target.result);
-      filesLoaded++;
+  const entry = {
+    images: imageList,
+    mood: mood,
+    note: note,
+    time: now.toLocaleTimeString("de-DE", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+  };
 
-      if (filesLoaded === allFiles.length) {
-        const today = new Date();
-        const todayDate = today.toISOString().split("T")[0];
+  const stored = getStoredEntries();
+  const index = stored.findIndex((e) => e.date === chosenDate);
 
-        const entry = {
-          images: imageList,
-          mood: mood,
-          note: note,
-          time: today.toLocaleTimeString("de-DE", {
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
-        };
+  if (index !== -1) {
+    stored[index].entries.push(entry);
+  } else {
+    stored.push({ date: chosenDate, entries: [entry] });
+  }
 
-        const stored = getStoredEntries();
-        const index = stored.findIndex((e) => e.date === todayDate);
-
-        if (index !== -1) {
-          stored[index].entries.push(entry);
-        } else {
-          stored.push({ date: todayDate, entries: [entry] });
-        }
-
-        saveEntries(stored);
-        entriesContainer.innerHTML = "";
-        renderEntry(
-          stored.find((e) => e.date === todayDate),
-          true
-        );
-        getForm.reset();
-      }
-    };
-
-    reader.readAsDataURL(file);
-  });
+  saveEntries(stored);
+  entriesContainer.innerHTML = "";
+  renderEntry(
+    stored.find((e) => e.date === chosenDate),
+    true
+  );
+  getForm.reset();
 
   console.log("images total:", imageList.length);
   console.log(
@@ -135,6 +129,8 @@ getForm.addEventListener("submit", (event) => {
     JSON.stringify(getStoredEntries()).length
   );
 });
+
+console.log("storage size (chars):", JSON.stringify(getStoredEntries()).length);
 
 entriesContainer.addEventListener("click", (event) => {
   if (event.target.classList.contains("deleteEntry")) {
@@ -165,21 +161,33 @@ entriesContainer.addEventListener("click", (event) => {
   }
 });
 
-
 // ===============================
 // 🧭 INITIALISIERUNG BEIM LADEN
 // ===============================
 
 document.addEventListener("DOMContentLoaded", () => {
   const entries = getStoredEntries();
-  const today = new Date().toISOString().split("T")[0];
-  const todayEntry = entries.find((entry) => entry.date === today);
-  if (todayEntry) {
-    renderEntry(todayEntry, true);
+  const currentPage = window.location.pathname;
+
+  if (currentPage.includes("entries.html")) {
+    // Alle Einträge anzeigen
+    entries
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .forEach((entry) => renderEntry(entry));
+  } else {
+    // Nur der heutige Eintrag für index.html
+    const today = new Date().toISOString().split("T")[0];
+    const todayEntry = entries.find((e) => e.date === today);
+    if (todayEntry) {
+      renderEntry(todayEntry, true);
+    }
   }
 });
 
-document.getElementById("clearButton").addEventListener("click", () => {
+clearBtn.addEventListener("click", () => {
+  const sicher = confirm("Möchtest du wirklich alle Einträge löschen?");
+  if (!sicher) return;
+
   localStorage.removeItem("diaryEntries");
   entriesContainer.innerHTML = "";
 });
