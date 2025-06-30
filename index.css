@@ -8,12 +8,40 @@ body {
   font-family: sans-serif;
 }
 
-/* ===================== ENTRIES  ==================== */
+/* ===================== HEADER  ==================== */
 
+header .main-nav {
+  position: fixed;
+  bottom: 0;
+  background-color: cornflowerblue;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.8em;
+  z-index: 1000;
+}
+
+header .main-nav .navbar {
+
+}
+
+header .main-nav a i {
+  font-size: 1.5em;
+}
+
+header .main-nav a .label {
+  display: none;
+}
+
+
+/* ===================== MAIN  ==================== */
+
+main {
+  padding-bottom: 26px;
+}
 /* ---------- Monat und Jahr ---------- */
-main div h2 {
+main h1 {
   color: #666666;
-  margin-top: 2em;
   padding: 0.5em;
   font-size: 16px;
   background-color: #f3f5f7;
@@ -57,9 +85,6 @@ main .entries .middle {
   padding: 0.5em;
 }
 
-main .entries .middle p {
-}
-
 main .entries .middle .middleBottom {
   gap: 0.5em;
   display: flex;
@@ -78,18 +103,6 @@ main .entries .right img {
   border-radius: 0.5em;
   object-fit: cover;
 }
-
-/* ===================== HEAD ==================== */
-
-header h1 {
-  color: #44c0ff;
-  font-size: 1.7rem;
-  text-align: center;
-  border-radius: 5px;
-  background-color: antiquewhite;
-}
-
-/* ===================== MAIN ==================== */
 
 /* ---------- Hier Eingabefeld ---------- */
 
@@ -120,21 +133,6 @@ form {
   border-radius: 0.5rem; /* optional: rundere Kanten */
 }
 
-#entries h3 {
-}
-
-#entries p {
-}
-
-.entry {
-  padding: 1rem;
-  border-bottom: 1px solid #ddd;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
 .entry-date {
   color: #888;
   font-size: 0.8rem;
@@ -162,6 +160,4 @@ form {
 
 /* ==================== MEDIA QUERIES =================== */
 
-/* ==================== MEDIA QUERIES =================== */
-
-/* ==================== MEDIA QUERIES =================== */
+@media (max-width: 768px){}

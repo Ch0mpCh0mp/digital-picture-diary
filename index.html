@@ -3,19 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
     <link rel="stylesheet" href="index.css" />
-    <title>My Day In Pictures</title>
+    <title>TODAYS VIEW</title>
   </head>
 
   <body>
     <header>
-      <h1>MY DAY</h1>
-      <nav>
-        <a href="entries.html">Alle Einträge</a>
+      <nav class="main-nav">
+        <a href="index.html" class="navbar">
+          <i class="fa-solid fa-camera"></i>
+          <span class="label">Today</span>
+        </a>
+        <a href="entries.html" class="navbar">
+          <i class="fa-solid fa-book-open"></i>
+          <span class="label">All Entries</span>
+        </a>
+        <a href="calender.html" class="navbar">
+          <i class="fa-regular fa-calendar"></i>
+          <span class="label">Kalender View</span>
+        </a>
       </nav>
     </header>
 
     <main>
+      <h1>MY DAY</h1>
+
       <form id="dailyMood">
         <!-- Bild hochladen -->
         <label for="imageUpload">What I Saw Today</label>
@@ -28,7 +45,7 @@
 
         <!-- Datum aussuchen eingeben -->
         <label for="entryDate">Choose Date</label>
-        <input type="date" id="entryDate" name="entryDate"/>
+        <input type="date" id="entryDate" name="entryDate" />
 
         <!-- Mood eingeben -->
         <label for="moodOfTheDay">My Mood</label>
@@ -46,7 +63,7 @@
     </main>
 
     <footer>
-       <button id="clearButton">Delete</button>
+      <button id="clearButton">Delete</button>
     </footer>
 
     <script src="index.js"></script>
