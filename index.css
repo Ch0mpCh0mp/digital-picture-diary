@@ -1,0 +1,167 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+/* ===================== ENTRIES  ==================== */
+
+/* ---------- Monat und Jahr ---------- */
+main div h2 {
+  color: #666666;
+  margin-top: 2em;
+  padding: 0.5em;
+  font-size: 16px;
+  background-color: #f3f5f7;
+}
+
+main .entries {
+  display: flex;
+}
+
+/* ---------- LINKS ---------- */
+
+main .entries .left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  flex: 0 0 50px;
+}
+
+main .entries .left .day {
+  font-size: 12px;
+  font-weight: 600;
+  color: #242525;
+}
+
+main .entries .left .date {
+  font-size: 17px;
+  font-weight: 600;
+  color: #242525;
+}
+
+/* ---------- MITTE ---------- */
+
+main .entries .middle {
+  color: #666666;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5em;
+}
+
+main .entries .middle p {
+}
+
+main .entries .middle .middleBottom {
+  gap: 0.5em;
+  display: flex;
+  font-size: 12px;
+}
+
+/* ---------- RECHTS ---------- */
+
+main .entries .right {
+  padding: 0.5em;
+}
+
+main .entries .right img {
+  width: 80px;
+  height: 80px;
+  border-radius: 0.5em;
+  object-fit: cover;
+}
+
+/* ===================== HEAD ==================== */
+
+header h1 {
+  color: #44c0ff;
+  font-size: 1.7rem;
+  text-align: center;
+  border-radius: 5px;
+  background-color: antiquewhite;
+}
+
+/* ===================== MAIN ==================== */
+
+/* ---------- Hier Eingabefeld ---------- */
+
+form {
+  background-color: rgb(255, 80, 95);
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  gap: 0.5em;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+/* ---------- Hier Ausgabefeld ---------- */
+
+#entries div {
+  margin-top: 0.5em;
+  padding: 1em;
+  border-radius: 0.5rem;
+  background-color: rgb(255, 80, 95);
+}
+
+#entries img {
+  height: auto;
+  max-width: 100%;
+  display: block;
+  border-radius: 0.5rem; /* optional: rundere Kanten */
+}
+
+#entries h3 {
+}
+
+#entries p {
+}
+
+.entry {
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.entry-date {
+  color: #888;
+  font-size: 0.8rem;
+}
+
+.entry-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entry-text {
+  flex-grow: 1;
+  padding-right: 1rem;
+}
+
+.entry-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+/* ==================== FOOTER =================== */
+
+/* ==================== MEDIA QUERIES =================== */
+
+/* ==================== MEDIA QUERIES =================== */
+
+/* ==================== MEDIA QUERIES =================== */

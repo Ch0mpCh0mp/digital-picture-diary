@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>My Day In Pictures</title>
+  </head>
+
+  <body>
+
+    <header>
+      <h1>MY DAY</h1>
+      <nav>
+        <a href="entries.html">Alle Einträge</a>
+      </nav>
+    </header>
+
+    <main>
+      <form id="dailyMood">
+        <!-- Bild hochladen -->
+        <label for="imageUpload">What I Saw Today</label>
+        <input
+          type="file"
+          id="imageUpload"
+          accept="image/jpg, image/jpeg, image/png, image/gif"
+          multiple
+        />
+
+        <!-- Mood eingeben -->
+        <label for="moodOfTheDay">My Mood</label>
+        <input type="text" name="mood" id="moodOfTheDay" />
+
+        <!-- Diary Eintrag des Tages eingeben -->
+        <label for="noteOfTheDay">Journal Entry</label>
+        <textarea name="note" id="noteOfTheDay"></textarea>
+
+        <!-- Button zum submitten -->
+        <button type="submit">Save my Day</button>
+      </form>
+
+      <section id="entries"></section>
+
+    </main>
+
+    <footer>
+    </footer>
+
+    <script src="index.js"></script>
+
+  </body>
+
+</html>
