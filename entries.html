@@ -6,33 +6,38 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+      <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="entries.css" />
     <title>ENTRIES VIEW</title>
   </head>
 
   <body>
-    <header>
-       <nav class="main-nav">
+     <header>
+      <nav class="main-nav">
+        <a href="#" class="navbar" id="clearButton">
+          <i class="fa-solid fa-trash"></i>
+          <span class="label">Delete</span>
+        </a>
         <a href="index.html" class="navbar">
-          <span class="icon">📷</span>
+          <i class="fa-solid fa-camera"></i>
           <span class="label">Today</span>
         </a>
         <a href="entries.html" class="navbar">
-          <span class="icon">📖</span>
+          <i class="fa-solid fa-book-open"></i>
           <span class="label">All Entries</span>
         </a>
         <a href="calender.html" class="navbar">
-          <span class="icon">📅</span>
+          <i class="fa-regular fa-calendar"></i>
           <span class="label">Kalender View</span>
+        </a>
+        <a href="#" id="toggleForm" class="navbar">
+          <i class="fa-solid fa-plus"></i>
+          <span class="label">Add</span>
         </a>
       </nav>
     </header>
 
     <main>
-      <div>
-        <h2></h2>
-      </div>
-
       <section class="entries"></section>
     </main>
 

@@ -5,27 +5,32 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: "Poiret One", sans-serif;
 }
 
-/* ===================== ENTRIES  ==================== */
+/* ==================== FARBCODES ==================== */
 
-main {
-  display: flex;
-  flex-direction: column;
+:root {
+  --blue: #44c0ff;
+  --blue-dark: #2ea9e5;
+  --bg-light: #f3f5f7;
+  --bg-white: #ffffff;
+  --text-dark: #242525;
+  --text-medium: #666666;
+  --text-light: #888888;
+  --text-label: #333333;
+  --border-color: #ccc;
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --focus-shadow: rgba(68, 192, 255, 0.2);
 }
 
-main div h2 {
-  color: #666666;
-  margin-top: 2em;
-  padding: 0.5em;
-  background-color: blanchedalmond;
-}
+
+/* ===================== NAVIGATION  ==================== */
 
 header .main-nav {
   position: fixed;
   bottom: 0;
-  background-color: cornflowerblue;
+  background-color: var(--bg-light);
   width: 100vw;
   display: flex;
   justify-content: space-around;
@@ -33,23 +38,65 @@ header .main-nav {
   z-index: 1000;
 }
 
+header .main-nav a i {
+  font-size: 1.5em;
+  color: var(--blue);
+}
+
+header .main-nav a .label {
+  display: none;
+}
+
+/* ===================== MAIN  ==================== */
+
+
+main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Platz für die Nav am Bottom!*/
+  padding-bottom: 12vh;
+}
+
+/* Monatsüberschriften aus dem JS */
+.entries h2 {
+  color: var(--blue-dark);
+  font-size: 1.6rem;
+  text-align: center;
+  background-color: var(--bg-light);
+  padding: 0.75em 1em;
+  margin: 2em auto 1em;
+  width: fit-content;
+  border-radius: 1em;
+  box-shadow: 0 2px 6px var(--shadow-light);
+  letter-spacing: 1px;
+}
+
+/* ===================== ENTRIES ==================== */
+
+
 .entry {
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-radius: 0.5em;
-  margin: 0.5em;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  margin: 1em;
+  padding: 1em;
+  font-weight: 600;
+  background-color: var(--bg-white);
+  box-shadow: 0 4px 10px var(--shadow-light);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.entry:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* ---------- LINKS ---------- */
 
 
-.entry time.daydate {
-  font-size: 14px;
-  text-align: center;
-  line-height: 1.4;
-}
 main .entry .left {
   padding: 0.5em;
   flex: 0 0 50px;
@@ -59,21 +106,22 @@ main .entry .left {
 main .entry .left .day {
   font-size: 12px;
   font-weight: 600;
-  color: #242525;
+  color: var(--text-dark);
 }
 
 main .entry .left .date {
   font-size: 17px;
   font-weight: 600;
-  color: #242525;
+  color: var(--text-dark);
 }
 
 /* ---------- MITTE ---------- */
 
 main .entry .middle {
   flex: 1 1 auto;
-  color: #666666;
+  color: var(--text-medium);
   font-size: 16px;
+  font-weight: 800;
   height: 80px;
   display: flex;
   padding: 0.5em;
@@ -100,8 +148,18 @@ main .entry .right img {
   object-fit: cover;
 }
 
-main {
-  padding-bottom: 26px;
+/* ===================== LÖSCHEN ==================== */
+
+
+body.delete-mode .entry {
+  position: relative;
+  box-shadow: 0 0 0 2px var(--blue-dark);
+  background-color: #fff8f8;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
 }
 
-/* ===================== MAIN  ==================== */
+body.delete-mode .entry:hover {
+  box-shadow: 0 0 0 3px red;
+  background-color: #ffe5e5;
+}

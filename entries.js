@@ -93,6 +93,18 @@ function renderEntry(entry) {
     entryDiv.appendChild(middle);
     entryDiv.appendChild(right);
     container.appendChild(entryDiv);
+
+    entryDiv.addEventListener("click", () => {
+      if (!document.body.classList.contains("delete-mode")) return;
+
+      const confirmDelete = confirm(
+        "Willst du diesen Tages-Eintrag wirklich löschen?"
+      );
+      if (confirmDelete) {
+        deleteEntryByDate(entry.date);
+        console.log("Lösche:", date);
+      }
+    });
   });
 
   return container;
@@ -142,4 +154,31 @@ document.addEventListener("DOMContentLoaded", () => {
         getEntries.appendChild(block);
       });
     });
+  document.body.classList.remove("delete-mode");
 });
+
+// ===============================
+// 🗑️ ALLE EINTRÄGE LÖSCHEN
+// ===============================
+
+document.getElementById("clearButton")?.addEventListener("click", (e) => {
+  e.preventDefault();
+  const isActive = document.body.classList.toggle("delete-mode");
+
+  if (isActive) {
+    alert(
+      "Löschen-Modus aktiviert. Klicke auf einen Eintrag, um ihn zu löschen."
+    );
+  } else {
+    alert("Löschen-Modus beendet.");
+  }
+});
+
+function deleteEntryByDate(date) {
+  const entries = getStoredEntries();
+  const updatedEntries = entries.filter((entry) => entry.date !== date);
+  console.log("Vorher:", entries.length, "→ Nachher:", updatedEntries.length);
+
+  localStorage.setItem("diaryEntries", JSON.stringify(updatedEntries));
+  location.reload();
+}
