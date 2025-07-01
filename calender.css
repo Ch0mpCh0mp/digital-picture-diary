@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header .main-nav {
+  position: fixed;
+  bottom: 0;
+  background-color: cornflowerblue;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.8em;
+  z-index: 1000;
+}
+
+main {
+  padding-bottom: 26px;
+}
+
+/* ===================== MAIN  ==================== */

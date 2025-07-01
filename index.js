@@ -9,6 +9,7 @@ const moodInput = document.querySelector("#moodOfTheDay");
 const noteInput = document.querySelector("#noteOfTheDay");
 const entriesContainer = document.getElementById("entries");
 const clearBtn = document.getElementById("clearButton");
+const toggleButton = document.getElementById("toggleForm");
 
 // ===============================
 // 🔧 HILFSFUNKTIONEN
@@ -43,16 +44,19 @@ function renderEntry(entry, isToday = false) {
     img.src = singleEntry.images[singleEntry.images.length - 1]; // letztes Bild
 
     const h3 = document.createElement("h3");
-    h3.textContent = "Mood: " + singleEntry.mood;
+    h3.textContent = singleEntry.mood;
 
     const p = document.createElement("p");
-    p.textContent = "Note: " + singleEntry.note;
+    p.textContent = singleEntry.note;
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("deleteEntry");
     deleteButton.setAttribute("data-date", entry.date);
     deleteButton.setAttribute("data-index", index);
-    deleteButton.textContent = "🗑️";
+    
+    const trashIcon = document.createElement("i");
+    trashIcon.classList.add("fa-solid", "fa-trash");
+    deleteButton.appendChild(trashIcon);
 
     container.appendChild(img);
     container.appendChild(h3);
@@ -122,6 +126,7 @@ getForm.addEventListener("submit", (event) => {
     true
   );
   getForm.reset();
+  getForm.classList.add("hidden");
 
   console.log("images total:", imageList.length);
   console.log(
@@ -190,6 +195,11 @@ clearBtn.addEventListener("click", () => {
 
   localStorage.removeItem("diaryEntries");
   entriesContainer.innerHTML = "";
+});
+
+toggleButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  getForm.classList.toggle("hidden");
 });
 
 function clearOldEntry() {

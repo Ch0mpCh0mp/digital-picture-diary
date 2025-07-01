@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="index.css" />
     <title>TODAYS VIEW</title>
@@ -15,6 +16,10 @@
   <body>
     <header>
       <nav class="main-nav">
+        <a href="#" class="navbar" id="clearButton">
+          <i class="fa-solid fa-trash"></i>
+          <span class="label">Delete</span>
+        </a>
         <a href="index.html" class="navbar">
           <i class="fa-solid fa-camera"></i>
           <span class="label">Today</span>
@@ -27,21 +32,29 @@
           <i class="fa-regular fa-calendar"></i>
           <span class="label">Kalender View</span>
         </a>
+        <a href="#" id="toggleForm" class="navbar">
+          <i class="fa-solid fa-plus"></i>
+          <span class="label">Add</span>
+        </a>
       </nav>
     </header>
 
     <main>
       <h1>MY DAY</h1>
 
-      <form id="dailyMood">
+      <form id="dailyMood" class="hidden">
         <!-- Bild hochladen -->
-        <label for="imageUpload">What I Saw Today</label>
-        <input
-          type="file"
-          id="imageUpload"
-          accept="image/jpg, image/jpeg, image/png, image/gif"
-          multiple
-        />
+        <div class="file-upload">
+          <label for="imageUpload" class="custom-file-label">
+            <i class="fa-solid fa-image"></i> Upload Images
+          </label>
+          <input
+            type="file"
+            id="imageUpload"
+            accept="image/jpg, image/jpeg, image/png, image/gif"
+            multiple
+          />
+        </div>
 
         <!-- Datum aussuchen eingeben -->
         <label for="entryDate">Choose Date</label>
@@ -59,12 +72,11 @@
         <button type="submit">Save my Day</button>
       </form>
 
+      <!-- Hier kommt alles raus -->
       <section id="entries"></section>
     </main>
 
-    <footer>
-      <button id="clearButton">Delete</button>
-    </footer>
+    <footer></footer>
 
     <script src="index.js"></script>
   </body>

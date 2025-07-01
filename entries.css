@@ -22,6 +22,17 @@ main div h2 {
   background-color: blanchedalmond;
 }
 
+header .main-nav {
+  position: fixed;
+  bottom: 0;
+  background-color: cornflowerblue;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.8em;
+  z-index: 1000;
+}
+
 .entry {
   display: flex;
   flex-direction: row;
@@ -88,3 +99,9 @@ main .entry .right img {
   border-radius: 0.5em;
   object-fit: cover;
 }
+
+main {
+  padding-bottom: 26px;
+}
+
+/* ===================== MAIN  ==================== */

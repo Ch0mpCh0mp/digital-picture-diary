@@ -4,16 +4,38 @@
   box-sizing: border-box;
 }
 
+html,
 body {
-  font-family: sans-serif;
+  height: 100%;
 }
 
-/* ===================== HEADER  ==================== */
+body {
+  height: 100vh;
+  font-family: 'Poiret One', sans-serif;
+}
+
+/* ==================== FARBCODES ==================== */
+:root {
+  --blue: #44c0ff;
+  --blue-dark: #2ea9e5;
+  --bg-light: #f3f5f7;
+  --bg-white: #ffffff;
+  --text-dark: #242525;
+  --text-medium: #666666;
+  --text-light: #888888;
+  --text-label: #333333;
+  --border-color: #ccc;
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --focus-shadow: rgba(68, 192, 255, 0.2);
+}
+
+
+/* ==================== HEADER ==================== */
 
 header .main-nav {
   position: fixed;
   bottom: 0;
-  background-color: cornflowerblue;
+  background-color: var(--bg-light);
   width: 100vw;
   display: flex;
   justify-content: space-around;
@@ -21,37 +43,55 @@ header .main-nav {
   z-index: 1000;
 }
 
-header .main-nav .navbar {
-
-}
-
+/* Icons */
 header .main-nav a i {
   font-size: 1.5em;
+  color: var(--blue);
 }
 
+/* Icons unsichtbar mchen */
 header .main-nav a .label {
   display: none;
 }
 
+/* ==================== MAIN ==================== */
 
-/* ===================== MAIN  ==================== */
 
 main {
-  padding-bottom: 26px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
-/* ---------- Monat und Jahr ---------- */
+
 main h1 {
-  color: #666666;
-  padding: 0.5em;
-  font-size: 16px;
-  background-color: #f3f5f7;
+  color: var(--blue);
+  padding: 1rem 0;
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  background-color: var(--bg-light);
+  position: relative;
+  letter-spacing: 1px;
+}
+
+main h1::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 4px;
+  background-color: var(--blue-dark);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+main .hidden {
+  display: none;
 }
 
 main .entries {
   display: flex;
 }
-
-/* ---------- LINKS ---------- */
 
 main .entries .left {
   display: flex;
@@ -74,8 +114,6 @@ main .entries .left .date {
   color: #242525;
 }
 
-/* ---------- MITTE ---------- */
-
 main .entries .middle {
   color: #666666;
   font-size: 16px;
@@ -91,8 +129,6 @@ main .entries .middle .middleBottom {
   font-size: 12px;
 }
 
-/* ---------- RECHTS ---------- */
-
 main .entries .right {
   padding: 0.5em;
 }
@@ -104,60 +140,123 @@ main .entries .right img {
   object-fit: cover;
 }
 
-/* ---------- Hier Eingabefeld ---------- */
+
+/* ==================== FORMULAR ==================== */
+
 
 form {
-  background-color: rgb(255, 80, 95);
+  background-color: var(--bg-white);
   display: flex;
   flex-direction: column;
-  max-width: 100%;
-  gap: 0.5em;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  gap: 1em;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  margin: 1.5rem auto;
+  flex: 0 0 auto;
 }
 
-/* ---------- Hier Ausgabefeld ---------- */
+/* Schrift für die Inputs */
+form label {
+  color: var(--text-label);
+  font-weight: 600;
+}
 
-#entries div {
-  margin-top: 0.5em;
-  padding: 1em;
+form input,
+form textarea {
+  padding: 0.6em 0.8em;
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
-  background-color: rgb(255, 80, 95);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+/* Fokuseffekt eim Eingeben */
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px var(--focus-shadow)
+}
+
+form button {
+  padding: 0.8em;
+  background-color: var(--blue);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #2ea9e5;
+}
+
+/* ==================== BILD UPLOAD BUTTON ==================== */
+
+/* Position für das versteckte Input-Feld*/
+.file-upload {
+  position: relative;
+}
+
+/* neuen Button stylen */
+.custom-file-label {
+  display: inline-block;
+  background-color: var(--blue);
+  color: white;
+  padding: 0.6em 1em;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+/* Icon für den Button */
+.custom-file-label i {
+  margin-right: 0.5em;
+}
+
+.custom-file-label:hover {
+  background-color: var(--blue-dark);
+}
+
+/* Datei Input unsichtar aber klickbar */
+.file-upload input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+
+/* ==================== INPUT AUS JS ==================== */
+
+
+#entries {
+  flex: 1;
+  overflow-y: auto;
+  /* nicht weg machen, brauche ich für die Nav unten! */
+  padding-bottom: 12vh;
+  background-color: var(--bg-light);
 }
 
 #entries img {
-  height: auto;
+  height: 70vh;
   max-width: 100%;
   display: block;
-  border-radius: 0.5rem; /* optional: rundere Kanten */
-}
-
-.entry-date {
-  color: #888;
-  font-size: 0.8rem;
-}
-
-.entry-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.entry-text {
-  flex-grow: 1;
-  padding-right: 1rem;
-}
-
-.entry-thumb {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
+  margin: 0 auto;
+  border: 3px solid var(--blue);
   border-radius: 0.5rem;
 }
 
-/* ==================== FOOTER =================== */
-
-/* ==================== MEDIA QUERIES =================== */
-
-@media (max-width: 768px){}
+.singleEntry {
+  text-align: center;
+}
