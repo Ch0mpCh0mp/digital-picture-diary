@@ -63,28 +63,27 @@ main {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 main h1 {
   color: var(--blue);
-  padding: 1rem 0;
-  font-size: 2.2rem;
+  padding: 0.8rem 0;
+  font-size: 2rem;
   font-weight: 800;
   text-align: center;
   background-color: var(--bg-light);
   position: relative;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 main h1::after {
   content: "";
   display: block;
   width: 40%;
-  height: 4px;
+  height: 2px;
   background-color: var(--blue-dark);
-  margin: 0.5rem auto 0;
-  border-radius: 2px;
+  margin: 0.3rem auto 0;
+  border-radius: 1px;
 }
 
 main .hidden {
@@ -251,7 +250,7 @@ form button:hover {
 }
 
 #entries img {
-  height: 70vh;
+  height: 60vh;
   max-width: 100%;
   display: block;
   margin: 0 auto;
@@ -261,4 +260,28 @@ form button:hover {
 
 .singleEntry {
   text-align: center;
+  margin: 1rem;
+  padding: 0.8rem;
+  background-color: var(--bg-white);
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px var(--shadow-light);
+}
+
+.singleEntry h3 {
+  font-size: 1.8rem;
+  color: var(--blue-dark);
+  margin-bottom: 0.5rem;
+}
+
+/* Tagebucheintrag umrahmen */
+.singleEntry p {
+  background-color: var(--bg-light);
+  border-left: 4px solid var(--blue);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-dark);
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
 }

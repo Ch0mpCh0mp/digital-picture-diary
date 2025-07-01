@@ -1,13 +1,31 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+/* ==================== FARBCODES ==================== */
+
+:root {
+  --blue: #44c0ff;
+  --blue-dark: #2ea9e5;
+  --bg-light: #f3f5f7;
+  --bg-white: #ffffff;
+  --text-dark: #242525;
+  --text-medium: #666666;
+  --text-light: #888888;
+  --text-label: #333333;
+  --border-color: #ccc;
+  --shadow-light: rgba(0, 0, 0, 0.05);
+  --focus-shadow: rgba(68, 192, 255, 0.2);
+}
+
+/* ==================== HEADER ==================== */
 
 header .main-nav {
   position: fixed;
   bottom: 0;
-  background-color: cornflowerblue;
+  background-color: var(--bg-light);
   width: 100vw;
   display: flex;
   justify-content: space-around;
@@ -15,8 +33,13 @@ header .main-nav {
   z-index: 1000;
 }
 
-main {
-  padding-bottom: 26px;
+/* Icons */
+header .main-nav a i {
+  font-size: 1.5em;
+  color: var(--blue);
 }
 
-/* ===================== MAIN  ==================== */
+/* Icons unsichtbar mchen */
+header .main-nav a .label {
+  display: none;
+}
